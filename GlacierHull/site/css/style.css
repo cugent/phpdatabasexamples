@@ -1,0 +1,165 @@
+body{
+	background-color: #143153;
+}
+
+#gh-jumbotron {
+	position: relative;
+	/*background: #000 url("/images/cruise_ship_01.jpg") center center;*/
+	/* Image Fade: https://css-tricks.com/design-considerations-text-images/ 
+	Src: https://flic.kr/p/5S7gBS
+	*/
+	background-image: 
+		linear-gradient(
+			rgba(0, 0, 0, 0.45),
+			rgba(0, 0, 0, 0.55)
+		),
+		url("/images/cruise_ship_01.jpg");
+	background-position: center;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	overflow: hidden;
+	padding-top: 200px;
+	color:white;
+}
+
+#gh-jumbotron-content h1, #gh-jumbotron-content p{
+	font-weight: bold;
+} 
+
+/* Palette Base: http://paletton.com/#uid=13C0u0kllllaFw0g0qFqFg0w0aF
+	Navbar Generated: http://work.smarchal.com/twbscolor/css/2b4a6f143153b5c6dbf2f5f90
+*/
+
+.navbar-default {
+  background-color: #2b4a6f;
+  border-color: #143153;
+}
+.navbar-default .navbar-brand {
+  color: #b5c6db;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #f2f5f9;
+}
+.navbar-default .navbar-text {
+  color: #b5c6db;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #b5c6db;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #f2f5f9;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #f2f5f9;
+  background-color: #143153;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #f2f5f9;
+  background-color: #143153;
+}
+.navbar-default .navbar-toggle {
+  border-color: #143153;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #143153;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #b5c6db;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #b5c6db;
+}
+.navbar-default .navbar-link {
+  color: #b5c6db;
+}
+.navbar-default .navbar-link:hover {
+  color: #f2f5f9;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #b5c6db;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #f2f5f9;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #f2f5f9;
+    background-color: #143153;
+  }
+}
+
+/* End navbar generated colors*/
+
+.btn-primary {
+	color:#f2f5f9;
+	background-color: #255D8C;
+	border-color: #173C5A;
+}
+
+#browseTable{
+  background-color: white;
+}
+
+
+#bookForm{
+  background-color: white;
+  margin-top:25px;
+  margin-bottom:25px
+  padding:20px;
+}
+
+.bodyContainer{
+  background-color: #cddff2;
+  /*border-radius: 10px;*/
+}
+
+.kv-table {
+  width: auto;
+}
+
+.ship-thumb{
+  max-height: 150px;
+  margin:20px;
+}
+
+.ship-row {
+  border-bottom: 1px solid #eee;
+}
+
+#search_location {
+  margin: 10px;
+}
+
+#datepicker_search {
+  margin:10px;
+}
+
+.cruiseDate {
+  top:30px;
+}
+
+#confirmTable, th, td
+{
+  border-color: #7a9bc1;
+}
+
+.price {
+  text-align:right;
+}
+
+#submitButton {
+  margin-bottom:25px;
+}

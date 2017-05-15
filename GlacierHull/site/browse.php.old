@@ -1,0 +1,207 @@
+<?php include '../includes/header.php'; ?>
+<?php include '../includes/db_connect.php'; ?>
+<?php include '../includes/utility.php'; ?>
+
+<?php 
+
+
+
+?>
+
+
+<div class="container bodyContainer img-rounded">
+	<div class="row">
+		<form action="output.php" method="POST">
+			<div class="row">
+				<div class="col-sm-7 form-inline" id="datepicker_search">
+					<div class="form-inline">
+						<input type="date" class="form-control" name="searchDateStart">
+						<span class="glyphicon glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+						<input type="date" class="form-control" name="searchDateEnd">
+					</div>
+				</div>
+				<div class="col-sm-4 pull-right" id="search_location">
+					<div class="input-group ">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+								<span class="glyphicon glyphicon-search" aria-hidden="true" aria-label="Search"></span>
+							</button>
+						</span>
+						<input type="text" class="form-control" name="locationSearch" placeholder="Search Location...">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+<?php		
+
+// $cruiseIDList = [];
+// $cruiseDates = [];
+
+// $sql = "SELECT * FROM Cruise;";
+
+// // $sql = "SELECT c.cruiseID, c.startDateTime, s.shipName, p.location AS portLocation
+// // 	FROM Ship s, Route r, Cruise c, Port p 
+// // 	WHERE s.shipName=c.shipName AND p.portID=r.portID AND r.routeID=c.routeID 
+// // 	ORDER BY c.startDateTime,c.cruiseID, r.queue;
+// // "
+
+
+// $result = mysql_query($sql);
+// $numrows = mysql_num_rows($result);
+	
+// for($i=0;$i<$numrows;$i++){ 
+// 	$row=mysql_fetch_array($result);
+// 	$cruiseIDList[] = $row[cruiseID];
+// 	$cruiseDates[] = $row[startDateTime];
+// }
+// ?>
+
+// <?php 
+// foreach ($cruiseIDList as $idx=>$cruiseID) {
+// 	$sql = "SELECT * FROM CruiseRouteInfo WHERE cruiseID=$cruiseID;";
+// 	$result = mysql_query($sql);
+// 	$numrows = mysql_num_rows($result);
+// 	$portLocations = [];
+	
+// 	for($i=0;$i<$numrows;$i++){ 
+// 		$row=mysql_fetch_array($result);
+// 		$portLocations[] = $row[location];
+// 	}
+// // for($i=0;$i<$numrows;$i++){ 
+// // 	$row=mysql_fetch_array($result);
+
+?>
+
+
+	<div class="row ship-row">
+		<div class="col-sm-offset-1 col-sm-9">
+			<h3><?php echo $row[shipName]; ?></h3>
+		</div>
+		<div class="col-sm-2 cruiseDate">
+			<p><?php  
+				$phpdate = strtotime( $cruiseDates[$idx] );
+				echo(date( 'M d, Y', $phpdate ));
+			?></p>
+		</div>
+		<div class="col-sm-offset-1 col-sm-2">
+			<img src="images/cruise_thumb.jpg" alt="Cruise Ship" class="img-thumbnail img-responsive" />
+		</div>
+		<div class="col-sm-2">
+			<h4>Ports</h4>
+			<ul>
+				<?php foreach($portLocations as $portName){ 
+					echo '<li>';
+					echo $portName;
+					echo '</li>';
+				}
+				?>
+			</ul>
+		</div>
+		<div class="col-sm-2 excursion">
+			<h4>Excursions</h4>
+			<ul>
+				<li>Spelunking</li>
+				<li>Skiing</li>
+				<li>Watch Paint Dry</li>
+			</ul>
+		</div>
+		<div class="col-sm-4">
+			<h4>Price</h4>
+			<table class="table table-condensed">
+				<th><small># PPL</small></th>
+				<th><small>Int.</small></th>
+				<th><small>Ext.</small></th>
+				<th><small>Suite</small></th>
+				<th><small></small></th>
+				<tr>
+					<td>First 2</td>
+					<td>$850/Ea.</td>
+					<td>$1050/Ea.</td>
+					<td>$1300/Ea.</td>
+				</tr>
+				<tr>
+					<td>3-8</td>
+					<td>$450/Ea.</td>
+					<td>$650/Ea.</td>
+					<td>$850/Ea.</td>
+				</tr>
+			</table>
+		</div>
+		
+		<hr>
+
+	</div>
+
+<?php } ?>
+		
+
+	</div>
+		<div class="col-md-10 col-md-offset-1">
+
+			
+			<table class="table table-hover" id="browseTable">
+				<th><a href="browse.php?sort=shipName">Ship Name</a></th>
+				<th>Cabin Type</th>
+				<th><a href="browse.php?sort=startLocation">Start Location</a></th>
+				<th><a href="browse.php?sort=endLocation">End Location</a></th>
+				<th><a href="browse.php?sort=price">Price</a></th>
+				<th>Price per Addt'l guest</th>
+				<th><a href="browse.php?sort=startDate">Date</a></th>
+				<th><a href="browse.php?sort="></a></th>
+				
+		<?php
+
+		$sql = "SELECT DISTINCT c.shipName,ca.type,st.location AS startLocation,
+					end.location AS endLocation,c.startDateTime,c.endDateTime,
+					l.priceFirstTwoPassengers,l.priceExtraPassengers,l.listingNum
+					FROM Cruise c, Listing l, Cabin ca, Port st, Port end
+					WHERE l.cruiseID=c.cruiseID AND l.cabinNum=ca.cabinNum
+					AND c.startPortID=st.portID AND c.endPortID=end.portID";
+			
+			if ($_GET['sort'] == 'shipName'){
+				$sql .= " ORDER BY c.shipName;";
+			// }elseif ($_GET['sort'] == 'cabinType'){
+			// 	$sql .= " ORDER BY ca.Type;"; 
+			}elseif ($_GET['sort'] == 'price'){
+				$sql .=  " ORDER BY l.priceFirstTwoPassengers;";
+			}elseif ($_GET['sort'] == 'startDate'){
+				$sql .= " ORDER BY c.startDateTime;";
+			}elseif ($_GET['sort'] =='startLocation'){
+				$sql .= " ORDER BY startLocation;";
+			}elseif ($_GET['sort'] =='endLocation'){
+				$sql .= " ORDER BY endLocation;";
+			}
+			
+						
+			$result = mysql_query($sql);
+			
+			$numrows = mysql_num_rows($result);
+			
+			for($i=0;$i<$numrows;$i++){
+				$row=mysql_fetch_array($result);
+				echo '<tr>';
+				echo '<td>',($row[shipName]),'</td>';
+				echo '<td>',($row[type]),'</td>';
+				echo '<td>',($row[startLocation]),'</td>';
+				echo '<td>',($row[endLocation]),'</td>';
+				echo '<td>',($row[priceFirstTwoPassengers]),'</td>';
+				echo '<td>',($row[priceExtraPassengers]),'</td>';
+				echo '<td>',($row[startDateTime]),'</td>';
+				echo '<td>';
+				echo '<a href="book.php?listingNum=', ($row[listingNum]), '">Book Now</a>';
+				echo '</td>';
+				echo '</tr>';
+			}
+			
+			mysql_close($conn);
+	?>
+		
+		</table>
+		</div>
+
+</div>
+
+
+<?php include '../includes/footer.php'; ?>

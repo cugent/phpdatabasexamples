@@ -1,0 +1,12 @@
+#!/bin/bash
+#cp -vr /home/cody/GlacierHull/site/* /var/www/html
+#cp -vr /home/cody/GlacierHull/includes/* /var/www/includes
+
+echo "[--------------------------------------]"
+
+rsync -ai --exclude '.c9' --delete site/ /var/www/html
+rsync -ai --delete includes/ /var/www/includes
+
+echo "Site updated: `date`"
+
+echo "[--------------------------------------]"

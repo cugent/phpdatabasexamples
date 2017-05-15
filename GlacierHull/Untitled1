@@ -1,0 +1,28 @@
+<?php
+
+$sql = "SELECT * FROM MyTable";
+
+if ($_GET['sort'] == 'type')
+{
+    $sql .= " ORDER BY type";
+}
+elseif ($_GET['sort'] == 'desc')
+{
+    $sql .= " ORDER BY Description";
+}
+elseif ($_GET['sort'] == 'recorded')
+{
+    $sql .= " ORDER BY DateRecorded";
+}
+elseif($_GET['sort'] == 'added')
+{
+    $sql .= " ORDER BY DateAdded";
+}
+
+$>
+
+
+			/*(SELECT DISTINCT location FROM Port,Cruise WHERE Cruise.startPortID=Port.portID),
+			(SELECT DISTINCT location FROM Port,Cruise WHERE Cruise.endPortID=Port.portID),*/
+			
+			http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-forms.php

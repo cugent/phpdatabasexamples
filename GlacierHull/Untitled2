@@ -1,0 +1,6 @@
+//CruiseRouteInfo view
+SELECT c.cruiseID,s.shipName,p.location FROM Ship s, Route r, Cruise c, Port p WHERE s.shipName=c.shipName AND p.portID=r.portID AND r.routeID=c.routeID ORDER BY cruiseID;
+
+//Sorting by DateTime and Location
+select * from CruiseRouteInfo WHERE startDateTime BETWEEN searchStartDate AND searchEndDate AND portLocation=searchLocation;
+//ggwp
